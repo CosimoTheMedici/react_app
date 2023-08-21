@@ -1,0 +1,8 @@
+export {default as TableComponent } from './tableComponent/Table'
+export {default as TableComponent2 } from './tableComponent/Table2'
+export {default as Invoice } from './invoiceComponent/Invoice'
+export {default as PageTitle } from './pageTitleComponent/PageTitle'
+export { Select1 } from './select/Select'
+export { Select } from './select/Select'
+export { TextArea,TextArea1 } from './textarea/Textarea'
+export { default as Modal } from './modal/Modal'
