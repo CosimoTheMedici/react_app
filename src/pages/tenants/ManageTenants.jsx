@@ -6,7 +6,7 @@ import { tenantDetailsInitialState } from '../../utils/initialStates';
 import { Input } from '../../customComponents/input/customInputs';
 import useAuth from '../../hooks/useAuth';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { displayPropertyfields } from '../../utils/helpers';
+import { displayPropertyfields, displayTenantfields } from '../../utils/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProperties } from '../../redux/propertiesActions';
 import { errorNotification, warningNotification } from '../../utils/notification';
@@ -163,7 +163,7 @@ const ManageTenants = () => {
           <TableModal stateChange= {tableDataRefresh} stateChanger={setTableDataRefresh} />
           </div>
               <TableComponent
-                fields={displayPropertyfields}
+                fields={displayTenantfields}
                 items={tenantsData}
                 scopedSlots={{
                   ACTION: (item, index) => (
@@ -327,23 +327,23 @@ const TableModal = ({stateChanger ,stateChange}) => {
       
             
   
-        // try {
-        //   const createPropertyResponse = await axiosInstance.post('api/v1/tenants/create',payload);
-        //   console.log("createPropertyResponse",createPropertyResponse)
-        //   const { status } = createPropertyResponse; 
+        try {
+          const createPropertyResponse = await axiosPrivate.post('api/v1/tenants/create',payload);
+          console.log("createPropertyResponse",createPropertyResponse)
+          const { status } = createPropertyResponse; 
           
-        //   if (status === 201) {
-        //     console.log("added")
-        //     successNotification("Tenant has been added")
+          if (status === 201) {
+            console.log("added")
+            successNotification("Tenant has been added")
   
             
-        //   } else {
-        //     errorNotification("Tenant not created successfully");
-        //   }
-        // } catch (ex) {
-        //   warningNotification("Error creating Tenant ");
-        //   console.log({ex})
-        // }
+          } else {
+            errorNotification("Tenant not created successfully");
+          }
+        } catch (ex) {
+          warningNotification("Error creating Tenant ");
+          console.log({ex})
+        }
       } else if (check === false) {
         errorNotification("Some fields are not complete ");
       }

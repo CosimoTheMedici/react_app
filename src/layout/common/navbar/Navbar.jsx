@@ -1,6 +1,8 @@
 import React from 'react'
+import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
+	const { auth} = useAuth();
   return (
     <header class="header">
 					<div class="toggle-btns">
@@ -105,7 +107,7 @@ const Navbar = () => {
 							</li>
 							<li class="dropdown">
 								<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-									<span class="user-name">Julie Sweet</span>
+									<span class="user-name">{auth.user}</span>
 									<span class="avatar">
 										<img src="img/user24.png" alt="avatar"/>
 										<span class="status busy"></span>
@@ -117,7 +119,7 @@ const Navbar = () => {
 											<div class="header-user">
 												<img src="img/user24.png" alt="Admin Template"/>
 											</div>
-											<h5>Julie Sweet</h5>
+											<h5>{auth.user}</h5>
 											<p>Admin</p>
 										</div>
 										<a href="user-profile.html"><i class="icon-user1"></i> My Profile</a>
