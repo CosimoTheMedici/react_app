@@ -14,7 +14,7 @@ import { errorNotification, successNotification, warningNotification } from '../
 
 const ManageAgents = () => {
   const [showDropdown, setShowDropdown] = useState({});
-  //const [agentsData, setAgentsData] = useState([])
+  const [agentsData1, setAgentsData1] = useState([])
   const axiosPrivate = useAxiosPrivate();
   const dispatch = useDispatch();
   const [tableDataRefresh, setTableDataRefresh] = useState(false)
@@ -71,9 +71,8 @@ const ManageAgents = () => {
   async function fetchAgentsList() {
     try {
       const { data: fetchAgentsResponses, status } = await axiosPrivate.get(`/api/v1/agents/`);
-      console.log("fetchPaymentsResponses",fetchAgentsResponses)
       const { data:agentsDatas } =fetchAgentsResponses
-      
+      console.log("fetchAgentsResponses",agentsDatas)
       let data = [];
       let x = 1;
 
@@ -114,9 +113,8 @@ const ManageAgents = () => {
     
 
       if (status === 200) {
-        //setPropertiesData(propertydatas);
+        setAgentsData1(data);
         dispatch(setAgentsData(data));
-        console.log("paymentsData mee",data)
 
        
       } else {
@@ -189,7 +187,7 @@ const ManageAgents = () => {
           </div>
               <TableComponent
                 fields={displayAgentfields}
-                items={agentsData}
+                items={agentsData1}
                 scopedSlots={{
                   ACTION: (item, index) => (
                     <div class="task-block">

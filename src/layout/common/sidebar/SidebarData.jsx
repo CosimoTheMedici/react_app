@@ -130,7 +130,7 @@ export const menuItemsAgentOwner = [
         },
         {
           name: "Manage Consumption",
-          path: "/invoice-grid",
+          path: "/manage/consumption",
         },
         {
           name: "Invoices Grid 2",

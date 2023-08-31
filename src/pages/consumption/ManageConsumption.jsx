@@ -1,8 +1,8 @@
 import React, { useState ,useEffect } from 'react';
 import { PageTitleBreadCrumbs, mainLayoutAuth } from '../../layout';
 import { Modal, Select, TableComponent, TableComponent2 } from '../../customComponents';
-import { items, fields } from '../../utils/arrayData';
-import { tenantDetailsInitialState } from '../../utils/initialStates';
+import { items, fields, charge_type_ArrayData } from '../../utils/arrayData';
+import { tenantDetailsInitialState, utilityConsumptionDetailsInitialState } from '../../utils/initialStates';
 import { Input } from '../../customComponents/input/customInputs';
 import useAuth from '../../hooks/useAuth';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
@@ -12,7 +12,7 @@ import { fetchProperties } from '../../redux/propertiesActions';
 import { errorNotification, warningNotification } from '../../utils/notification';
 
 
-const ManageTenants = () => {
+const ManageConsumption = () => {
   const [showDropdown, setShowDropdown] = useState({});
   const [tenantsData, setTenantsData] = useState([])
   const [tableDataRefresh, setTableDataRefresh] = useState(false)
@@ -202,7 +202,7 @@ const ManageTenants = () => {
   );
 };
 
-export default mainLayoutAuth(ManageTenants);
+export default mainLayoutAuth(ManageConsumption);
 
 
 
@@ -212,6 +212,7 @@ export default mainLayoutAuth(ManageTenants);
 
 const TableModal = ({stateChanger ,stateChange}) => {
     const [tenantDetails, setTenantDetails] = useState({tenantDetailsInitialState});
+    const [utilityconsumptionDetails,setUtilityconsumptionDetails]=useState(utilityConsumptionDetailsInitialState)
     const{auth}= useAuth()
     const axiosPrivate = useAxiosPrivate();
     const [unitsArrayData,setUnitsArrayData]=useState([])
@@ -232,7 +233,7 @@ const TableModal = ({stateChanger ,stateChange}) => {
       try {
         const {data:response,status} = await axiosPrivate.get(`api/v1/units/vacantUnitsproperyID/${value}`);
         const { data:getUnitResponses } = response;
-        console.log("getUnitResponses",getUnitResponses)
+        console.log("getUnitResponses---->",getUnitResponses)
   
   
         
@@ -373,7 +374,7 @@ const TableModal = ({stateChanger ,stateChange}) => {
 				<i class="icon-printer"></i> Print
 			</a> */}
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customModalTwo">
-			<i class="icon-person_add" style={{fontSize:'18px'}}></i> Create Tenant
+			<i class="icon-droplet" style={{fontSize:'18px'}}></i> Record Consumption
 			</button>
 		</div>
     	</div>
@@ -381,7 +382,7 @@ const TableModal = ({stateChanger ,stateChange}) => {
 										<Modal 
 										modalheader={
 											<>
-											<h5 class="modal-title" id="customModalTwoLabel">Create Tenant</h5>
+											<h5 class="modal-title" id="customModalTwoLabel">Add Consumption</h5>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
@@ -391,73 +392,21 @@ const TableModal = ({stateChanger ,stateChange}) => {
                                            <form onSubmit={handleSubmit}>
 										
 										
-											<Input
-                                                labelText="First Name"
-                                                placeholder="First Name"
-                                                inputType="text"
-                                                onChange={handleChange}
-                                                value={tenantDetails.firstName}
-                                                name="firstName"
-                                                id="firstName"
-
-                                            />
-										
-                    <Input
-                                                labelText="Second Name"
-                                                placeholder="Second Name"
-                                                inputType="text"
-                                                onChange={handleChange}
-                                                value={tenantDetails.secondName}
-                                                name="secondName"
-                                                id="secondName"
-
-                                            />
-									
-                    <Input
-                                                labelText="Last Name"
-                                                placeholder="Last Name"
-                                                inputType="test"
-                                                onChange={handleChange}
-                                                value={tenantDetails.lastName}
-                                                name="lastName"
-                                                id="lastName"
-
-                                            />
-								
-                    <Input
-                                                labelText="ID Number"
-                                                placeholder="ID Number"
-                                                inputType="number"
-                                                onChange={handleChange}
-                                                value={tenantDetails.IDNumber}
-                                                name="IDNumber"
-                                                id="IDNumber"
-
-                                            />
-						
-                    <Input
-                                                labelText="Email"
-                                                placeholder="Email"
-                                                inputType="email"
-                                                onChange={handleChange}
-                                                value={tenantDetails.email}
-                                                name="email"
-                                                id="email"
-
-                                            />
-					
-                    <Input
-                                                labelText="Phone Number"
-                                                placeholder="Phone Number"
-                                                inputType="number"
-                                                onChange={handleChange}
-                                                value={tenantDetails.phoneNumber}
-                                                name="phoneNumber"
-                                                id="phoneNumber"
-
-                                            />
-										
                     <Select
+                                                arrayData={propertyData}
+                                                defaultSelectText="Select Propety Name"
+                                                onChange={(e) => {
+                                                      handleChange(e);
+                                                      fetchUnits(e);
+                                                    }}
+                                                name="reading_propertyID"
+                                                id="reading_propertyID"
+                                                labelText="Propety Name"
+                                                value={utilityconsumptionDetails.charge_property_id}
+                                  
+
+                                            />
+                    {/* <Select
                                                 labelText="Property Name"
                                                 defaultSelectText="Select Property Name"
                                                 inputType="test"
@@ -470,9 +419,9 @@ const TableModal = ({stateChanger ,stateChange}) => {
                                                 id="propertyID"
                                                 arrayData={propertyData}
 
-                                            />
+                                            /> */}
 									
-                    <Select
+                    {/* <Select
                                                 labelText="Unit Name"
                                                 defaultSelectText="Select Unit Name"
                                                 inputType="test"
@@ -482,39 +431,41 @@ const TableModal = ({stateChanger ,stateChange}) => {
                                                 id="unitName"
                                                 arrayData={unitsArrayData}
 
-                                            />
+                                            /> */}
 									
-                    <Input
-                                                labelText="Emergency Person"
-                                                placeholder="Emergency Person"
-                                                inputType="text"
-                                                onChange={handleChange}
-                                                value={tenantDetails.emergencyPerson}
-                                                name="emergencyPerson"
-                                                id="emergencyPerson"
+         
+                    
+							
+
+                    <Select
+                                                 arrayData={unitsArrayData}
+                                                 defaultSelectText="Select Unit Name"
+                                                 onChange={handleChange}              
+                                                 name="reading_unitID"
+                                                 id="reading_unitID"
+                                                 labelText="Unit Name"
+                                                 value={utilityconsumptionDetails.reading_unitID}
 
                                             />
-                    
-										
-                    <Input
-                                                labelText="Emergency Number"
-                                                placeholder="Emergency Number"
-                                                inputType="number"
+                    <Select
+                                                arrayData={charge_type_ArrayData}
+                                                defaultSelectText="Select Utility"
                                                 onChange={handleChange}
-                                                value={tenantDetails.emergencyNumber}
-                                                name="emergencyNumber"
-                                                id="emergencyNumber"
+                                                name="reading_utilityTypeID"
+                                                id="reading_utilityTypeID"
+                                                labelText="Utility Type"
+                                                value={utilityconsumptionDetails.charge_property_id}
 
                                             />
 							
                     <Input
-                                                labelText="Emergency Person Relation"
-                                                placeholder="Emergency Person Relation"
-                                                inputType="text"
-                                                onChange={handleChange}
-                                                value={tenantDetails.emergencyPersonRelation}
-                                                name="emergencyPersonRelation"
-                                                id="emergencyPersonRelation"
+                                                onChange={handleChange}  
+                                                name ="reading_nowReading"  
+                                                id= "reading_nowReading"
+                                                labelText="Utility Reading"  
+                                                InputType="number"    
+                                                placeholder="charge name"
+                                                value={utilityconsumptionDetails.charge_name}
 
                                             />
 									

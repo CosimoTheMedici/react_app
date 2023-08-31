@@ -30,10 +30,10 @@ const ManageUnits = () => {
   const axiosPrivate = useAxiosPrivate();
   const dispatch = useDispatch();
   const utilityChargesArray = useSelector((state) => state.utilityData.utilityData);
-  const utilityArray = useSelector(
-    (state) => state.utilityArray.utilityArrayData
-  );
-  console.log("propertyArray----->", utilityChargesArray);
+  // const utilityArray = useSelector(
+  //   (state) => state.utilityArray.utilityArrayData
+  // );
+  console.log("propertyArray-----|>", utilityChargesArray);
   useEffect(() => {
     // Dispatch both fetchTenants and fetchProperties actions
     dispatch(fetchProperties(axiosPrivate));
@@ -54,144 +54,167 @@ const ManageUnits = () => {
     fetchUnitsList();
   }, []);
 
-  // async function fetchUnitsList() {
-  //   let id = 1;
-  //   try {
-  //     const { data: responses, status } = await axiosPrivate.get(
-  //       `/api/v1/units/myassignedunits/${id}`
-  //     );
-  //     console.log("propertyArray  responses----->", responses);
-  //     // const fetchUnitsResponses = await axiosPrivate.get(`/api/v1/units/myassignedunits/${id}`);
-  //     const { data: unitsdatas } = responses;
-  //         let data = [];
-  //            let x = 1
 
-  //           unitsdatas.forEach((unitsdata) => {
-  //               let {
-  //                   _id=x,
-  //                   property_Name,
-  //                   property_id,
-  //                   unit_description,
-  //                   unit_garbage_charge,
-  //                   unit_id,
-  //                   unit_kplc_charge,
-  //                   unit_name,
-  //                   unit_occupancy,
-  //                   unit_property_id,
-  //                   unit_rent_Amount,
-  //                   unit_status,
-  //                   unit_type,
-  //                   unit_water_charge,
+//   async function fetchUnitsList() {
+//     const id = 1;
 
-  //       } = unitsdata;
+//     try {
+//         const { data: responses, status } = await axiosPrivate.get(`/api/v1/units/myassignedunits/${id}`);
+//         console.log("propertyArray responses ----->", responses.data);
+
+//         const { data: unitsdatas } = responses;
+//         const data = [];
+
+//         for (let index = 0; index < unitsdatas.length; index++) {
+//             const unitsdata = unitsdatas[index];
+//             let {
+//                 property_Name,
+//                 property_id,
+//                 unit_description,
+//                 unit_garbage_charge,
+//                 unit_id,
+//                 unit_kplc_charge,
+//                 unit_name,
+//                 unit_occupancy,
+//                 unit_property_id,
+//                 unit_rent_Amount,
+//                 unit_status,
+//                 unit_type,
+//                 unit_water_charge
+//             } = unitsdata;
+
+//                 let unittype = findArrayValue(unit_type_array, unit_type)
+//                 let unitwatercharge =  findArrayRowUnit(utilityChargesArray, unit_water_charge)
+//                 let unitgarbagecharge = findArrayRowUnit(utilityChargesArray, unit_garbage_charge)
+//                 let unitkplccharge = findArrayRowUnit(utilityChargesArray, unit_kplc_charge)
+//                 let unitwaterchargeName = findArrayRowName(utilityChargesArray, unit_water_charge)
+//                 let unitgarbagechargeName = findArrayRowName(utilityChargesArray, unit_garbage_charge)
+//                 let unitkplcchargeName = findArrayRowName(utilityChargesArray, unit_kplc_charge)
+
+//             const row = {
+//                 _id: index + 1,
+//                 property_Name,
+//                 property_id,
+//                 unit_description,
+//                 unit_id,
+//                 unit_name,
+//                 unit_occupancy: unit_occupancy === 2 ? "vacant" : "occupied",
+//                 unit_property_id,
+//                 unit_rent_Amount,
+//                 unit_status: unit_status === 1 ? "OK" : "Not Ok",
+//                 unit_type:unittype?unittype:1,
+//                 unit_water_charge: unitwatercharge?unitwatercharge:1,
+//                 unit_garbage_charge: unitgarbagecharge?unitgarbagecharge:1,
+//                 unit_kplc_charge: unitkplccharge?unitkplccharge:1,
+//                 unit_water_charge: unitwaterchargeName?unitwaterchargeName:1,
+//                 unit_garbage_chargeName: unitgarbagechargeName?unitgarbagechargeName:1,
+//                 unit_kplc_chargeName: unitkplcchargeName?unitkplcchargeName:1
+                
+//             };
+
+//             data.push(row);
+//         }
+
+//         // Map units data to the chargeArray
+//         const unitsDataWithCharges = data.map((unit) => ({
+//             ...unit,
+//             waterCharge: unit.unit_water_charge,
+//             powerCharge: unit.unit_kplc_charge,
+//             garbageCharge: unit.unit_garbage_charge
+//         }));
+
+//         if (status === 200) {
+//             setUnitData(unitsDataWithCharges);
+//         } else {
+//             errorNotification("Unable to fetch units data");
+//         }
+//     } catch (error) {
+//         console.error("Error fetching units:", error);
+//         // Handle the error if needed
+//     }
+// }
 
 
-  //         const datas = {
-  //                  _id,
-  //                   property_Name,
-  //                   property_id,
-  //                   unit_description,
-  //                   unit_id,
-  //                   unit_name,
-  //                   unit_occupancy:unit_occupancy==2?"vacant":"occupied",
-  //                   unit_property_id,
-  //                   unit_rent_Amount,
-  //                   unit_status:unit_status==1?"OK":"Not Ok",
-  //                   unit_type:findArrayValue(unit_type_array,unit_water_charge),
-  //                   unit_water_charge:findArrayRowUnit(utilityChargesArray,unit_water_charge),
-  //                   unit_garbage_charge:findArrayRowUnit(utilityChargesArray,unit_garbage_charge),
-  //                   unit_kplc_charge:findArrayRowUnit(utilityChargesArray,unit_kplc_charge),
-  //                   unit_water_chargeName:findArrayRowName(utilityChargesArray,unit_water_charge),
-  //                   unit_garbage_chargeName:findArrayRowName(utilityChargesArray,unit_water_charge),
-  //                   unit_kplc_chargeName:findArrayRowName(utilityChargesArray,unit_water_charge)
+async function fetchUnitsList() {
+  const id = 1;
 
-  //       };
-  //         data.push(datas);
-  //         x = x + 1;
-              
+  try {
+      const { data: responses, status } = await axiosPrivate.get(`/api/v1/units/myassignedunits/${id}`);
+      console.log("propertyArray responses ----->", responses.data);
 
-  //           })
+      const { data: unitsdatas } = responses;
+      const data = [];
 
+      for (let index = 0; index < unitsdatas.length; index++) {
+          const unitsdata = unitsdatas[index];
+          let {
+              property_Name,
+              property_id,
+              unit_description,
+              unit_garbage_charge,
+              unit_id,
+              unit_kplc_charge,
+              unit_name,
+              unit_occupancy,
+              unit_property_id,
+              unit_rent_Amount,
+              unit_status,
+              unit_type,
+              unit_water_charge
+          } = unitsdata;
 
-  //     if (status === 200) {
-  //       setUnitData(data);
-  //     } else {
-  //       errorNotification("Unable to units data ");
-  //     }
-  //   } catch (ex) {
-  //     //errorNotification("Unable to fetch Partners--");
-  //     console.log({ ex });
-  //   }
-  // }
-  async function fetchUnitsList() {
-    const id = 1;
+          const [unittype, unitwatercharge, unitgarbagecharge, unitkplccharge, unitwaterchargeName, unitgarbagechargeName, unitkplcchargeName] = await Promise.all([
+              findArrayValue(unit_type_array, unit_type),
+              findArrayRowUnit(utilityChargesArray, unit_water_charge),
+              findArrayRowUnit(utilityChargesArray, unit_garbage_charge),
+              findArrayRowUnit(utilityChargesArray, unit_kplc_charge),
+              findArrayRowName(utilityChargesArray, unit_water_charge),
+              findArrayRowName(utilityChargesArray, unit_garbage_charge),
+              findArrayRowName(utilityChargesArray, unit_kplc_charge)
+          ]);
 
-    try {
-        const { data: responses, status } = await axiosPrivate.get(`/api/v1/units/myassignedunits/${id}`);
-        console.log("propertyArray responses ----->", responses);
+          const row = {
+              _id: index + 1,
+              property_Name,
+              property_id,
+              unit_description,
+              unit_id,
+              unit_name,
+              unit_occupancy: unit_occupancy === 1 ? "vacant" : "occupied",
+              unit_property_id,
+              unit_rent_Amount,
+              unit_status: unit_status === 1 ? "OK" : "Not Ok",
+              unit_type: unittype ? unittype.value : 1,
+              unit_water_charge: unitwatercharge ? unitwatercharge.charge_id : 1,
+              unit_garbage_charge: unitgarbagecharge ? unitgarbagecharge.charge_id : 1,
+              unit_kplc_charge: unitkplccharge ? unitkplccharge.charge_id : 1,
+              unit_water_chargeName: unitwaterchargeName ? unitwaterchargeName.charge_id : 1,
+              unit_garbage_chargeName: unitgarbagechargeName ? unitgarbagechargeName.charge_id : 1,
+              unit_kplc_chargeName: unitkplcchargeName ? unitkplcchargeName.charge_id : 1
+          };
 
-        const { data: unitsdatas } = responses;
-        const data = [];
+          data.push(row);
+      }
 
-        for (let index = 0; index < unitsdatas.length; index++) {
-            const unitsdata = unitsdatas[index];
-            const {
-                property_Name,
-                property_id,
-                unit_description,
-                unit_garbage_charge,
-                unit_id,
-                unit_kplc_charge,
-                unit_name,
-                unit_occupancy,
-                unit_property_id,
-                unit_rent_Amount,
-                unit_status,
-                unit_type,
-                unit_water_charge
-            } = unitsdata;
+      // Map units data to the chargeArray
+      const unitsDataWithCharges = data.map((unit) => ({
+          ...unit,
+          waterCharge: unit.unit_water_charge,
+          powerCharge: unit.unit_kplc_charge,
+          garbageCharge: unit.unit_garbage_charge
+      }));
 
-            const row = {
-                _id: index + 1,
-                property_Name,
-                property_id,
-                unit_description,
-                unit_id,
-                unit_name,
-                unit_occupancy: unit_occupancy === 2 ? "vacant" : "occupied",
-                unit_property_id,
-                unit_rent_Amount,
-                unit_status: unit_status === 1 ? "OK" : "Not Ok",
-                unit_type: findArrayValue(unit_type_array, unit_water_charge),
-                unit_water_charge: findArrayRowUnit(utilityChargesArray, unit_water_charge),
-                unit_garbage_charge: findArrayRowUnit(utilityChargesArray, unit_garbage_charge),
-                unit_kplc_charge: findArrayRowUnit(utilityChargesArray, unit_kplc_charge),
-                unit_water_chargeName: findArrayRowName(utilityChargesArray, unit_water_charge),
-                unit_garbage_chargeName: findArrayRowName(utilityChargesArray, unit_garbage_charge),
-                unit_kplc_chargeName: findArrayRowName(utilityChargesArray, unit_kplc_charge)
-            };
-
-            data.push(row);
-        }
-
-        // Map units data to the chargeArray
-        const unitsDataWithCharges = data.map((unit) => ({
-            ...unit,
-            waterCharge: unit.unit_water_charge,
-            powerCharge: unit.unit_kplc_charge,
-            garbageCharge: unit.unit_garbage_charge
-        }));
-
-        if (status === 200) {
-            setUnitData(unitsDataWithCharges);
-        } else {
-            errorNotification("Unable to fetch units data");
-        }
-    } catch (error) {
-        console.error("Error fetching units:", error);
-        // Handle the error if needed
-    }
+      if (status === 200) {
+          setUnitData(unitsDataWithCharges);
+      } else {
+          errorNotification("Unable to fetch units data");
+      }
+  } catch (error) {
+      console.error("Error fetching units:", error);
+      // Handle the error if needed
+  }
 }
+
 
 
 

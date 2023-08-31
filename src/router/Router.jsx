@@ -8,6 +8,7 @@ import { Invoices ,Table , CreateTenant,CreateUnit,CreateProperty, CreateAgent, 
          ManageUnits,
          ManageUtility,
          Dashboard,
+         ManageConsumption,
       } from '../pages'
 
 
@@ -64,6 +65,7 @@ const Router = () => {
         <Route path='/manage/properties' element={< ManageProperty/>} />
         <Route path='/manage/units' element={< ManageUnits/>} />
         <Route path='/manage/utilities' element={< ManageUtility/>} />
+        <Route path='/manage/consumption' element={< ManageConsumption/>} />
 
         </Route>
         <Route element={<RequireAuth allowedRoles={[6000]}/>}>

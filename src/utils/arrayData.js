@@ -498,8 +498,13 @@ export const charge_type = [
 ]
 export const charge_type_ArrayData = [
   { label:"Water Charge ",  value:1},
-  { label:"KPLC Charge ",  value:2},
-  { label:"Garbage Charge ",  value:3}
+  { label:"KPLC Charge ",  value:2}
+
+ ]
+export const utility_array_Data = [
+  { label:"Water  ",  value:1},
+  { label:"KPLC  ",  value:2},
+  { label:"Garbage ",  value:3}
 
  ]
 

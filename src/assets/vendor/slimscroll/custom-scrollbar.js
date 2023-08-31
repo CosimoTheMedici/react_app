@@ -1,5 +1,4 @@
 // Custom Scroll for Sidebar
-import $ from "jquery"
 $(function() {
 	$('.sidebar-content').slimScroll({
 		color: '#eff1f5',
