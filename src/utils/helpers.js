@@ -379,3 +379,62 @@ export const displayAgentfields = [
  
      }
  ];
+ export const displayUtilityCasefields = [
+   {
+      key: "_id",
+      label: "ID",
+         
+   },
+   {
+       key: "property_Name",
+       label: "Property",
+
+       sort: true,
+    },
+   {
+      key: "unit_name",
+      label: "Unit",
+   
+   },
+   {
+      key: "reading_prev_reading",
+      label: "Prev Reading",
+     
+   },
+   {
+       key: "reading_nowReading",
+       label: "Curr Reading",
+    },
+  
+
+ 
+   {
+      key: "reading_record",
+      label: "Reading",
+
+   },
+   {
+      key: "reading_utilityTypeID",
+      label: "Utility Type",
+ 
+   },
+   {
+       key: "reading_payment_status",
+       label: "Payment Status",
+
+    },
+   
+   {
+      key: "reading_I_N",
+      label: "Invoice No",
+
+   },
+ 
+   
+   
+   {
+      key: 'ACTION',
+      label: 'ACTION',
+ 
+     }
+ ];

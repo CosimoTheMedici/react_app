@@ -116,9 +116,10 @@ export function SelectRequired({
                 : "----------Select---------"}
             </option>
             {arrayData.map((data, index) => (
-              <option key={index} value={data.value || data.label}>
+              <option key={index} value={data.value}>
                 {data.label}
               </option>
+              
             ))}
 											</select>
 									</div>
@@ -169,4 +170,49 @@ export function SelectRequired({
     labelText: PropTypes.string,
     defaultSelectText: PropTypes.string,
     arrayData: PropTypes.array.isRequired,
+  };
+
+
+  export function Select2({
+    labelText,
+    arrayData,
+    defaultSelectText,
+    onChange,
+    value,
+    name,
+    id
+  }) {
+    return (
+      <div className="form-group"> {/* Changed 'class' to 'className' */}
+        <label htmlFor={id}>{labelText}</label> {/* Changed 'for' to 'htmlFor' */}
+        <select
+          className="form-control" 
+          name={name}
+          id={id}
+          onChange={onChange}
+          value={value}
+        >
+          <option>
+            {defaultSelectText
+              ? `---------${defaultSelectText}--------`
+              : "----------Select---------"}
+          </option>
+          {arrayData.map((data, index) => (
+            <option key={index} value={data.value}>
+              {data.label}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  }
+  
+  Select2.propTypes = {
+    labelText: PropTypes.string,
+    defaultSelectText: PropTypes.string,
+    arrayData: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired, // Add PropTypes for onChange and value
+    value: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
   };

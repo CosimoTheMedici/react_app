@@ -85,7 +85,9 @@ const ManageUtility = () => {
                 charge_visibility,
      
     } = fetchChargeResponse;
-console.log("...................",findArrayValue(charge_type_ArrayData,charge_type))
+    if(charge_type==1)charge_type="Water Charge"
+    if(charge_type==2)charge_type="KPLC Charge"
+    if(charge_type==3)charge_type="Garbage Charge"
     const datas = {
         _id,
         charge_created_by,
@@ -95,7 +97,7 @@ console.log("...................",findArrayValue(charge_type_ArrayData,charge_ty
         charge_per_unit,
         charge_property_id,
         charge_status:charge_status===1?'enabled':'disabled',
-        charge_type:findArrayValue(charge_type_ArrayData,charge_type),
+        charge_type:charge_type,
         charge_visibility,
 
     };
