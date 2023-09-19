@@ -182,7 +182,7 @@ export const menuItemsAgentOwner = [
         },
         {
           name: "Invoices List",
-          path: "/invoices",
+          path: "/manage/invoices",
           icon: <i class="icon-list2"></i>,
           exact: "false",
         },

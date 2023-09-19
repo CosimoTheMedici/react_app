@@ -438,3 +438,73 @@ export const displayAgentfields = [
  
      }
  ];
+
+ export const displayPreInvoicefields = [
+   {
+      key: "_id",
+      label: "ID",
+      sort: true,
+        
+   },
+
+   {
+      key: "property_Name",
+      label: "Property",
+      
+   },
+  
+   {
+      key: "unit_name",
+      label: "Unit",
+      
+   },
+   
+
+ 
+   {
+      key: "unit_rent_Amount",
+      label: "Rent",
+      sort: true,
+   },
+
+   {
+      key: "reading_record",
+      label: "water Reading",
+      sort: true,
+   },
+   {
+      key: "unit_water_charge_per_unit",
+      label: "per Unit",
+      sort: true,
+   },
+
+   {
+      key: "reading_amount",
+      label: "water amount",
+      sort: true,
+   },
+
+   {
+      key: "unit_garbage_charge_per_unit",
+      label: "Garbage ",
+      sort: true,
+   },
+   {
+      key: "total_amount",
+      label: "Total Amount ",
+      sort: true,
+   },
+   {
+      key: "reading_date",
+      label: "Date",
+      sort: true,
+   }, 
+   
+   {
+      key: 'ACTION',
+      label: 'ACTION',
+ 
+     }
+ ];
+
+        
