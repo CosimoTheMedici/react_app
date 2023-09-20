@@ -55,7 +55,7 @@ const Login = () => {
             var decoded = jwt_decode(fetchLoginResponses.accessToken);
             console.log("decoded",decoded)
             const email = decoded.email
-            let cat = decoded.result.user_category.split(",");
+            let cat = decoded.user_category.split(",");
              cat = cat.map(Number);
              console.log("cat",cat)
 

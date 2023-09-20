@@ -1,5 +1,5 @@
 {
-    "ApiServiceBaseUrl1":"http://localhost:3500/",
-    "ApiServiceBaseUrl":"https://hair-be-cutter.vercel.app/"
+    "ApiServiceBaseUrl":"http://localhost:3500/",
+    "ApiServiceBaseUrl1":"https://hair-be-cutter.vercel.app/"
 
 }
