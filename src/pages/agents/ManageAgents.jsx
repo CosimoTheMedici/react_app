@@ -10,6 +10,7 @@ import { displayAgentfields } from '../../utils/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAgentsData } from '../../features/actions';
 import { errorNotification, successNotification, warningNotification } from '../../utils/notification';
+import { ModalComponent } from '../../customComponents/modal/Modal';
 
 
 const ManageAgents = () => {
@@ -237,6 +238,7 @@ export default mainLayoutAuth(ManageAgents);
 
 const TableModal = ({stateChanger ,stateChange}) => {
     const [agentDetails, setAgentDetails] = useState(agentDetailsInitialState);
+    const [modalUpdateIntegration, setModalUpdateIntegration] = useState(false);
     const{auth}= useAuth()
     const dispatch = useDispatch();
     const agentsData = useSelector(state => state.agentsData);
@@ -314,6 +316,12 @@ const TableModal = ({stateChanger ,stateChange}) => {
           [name]: value,
         });
       };
+
+      const handleToggleUpdateIntegration = () => {
+        //setCurrentViewRecord(item);
+        setModalUpdateIntegration(!modalUpdateIntegration);
+      };
+    
 	return (
 		<>
 		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -324,22 +332,27 @@ const TableModal = ({stateChanger ,stateChange}) => {
 			<a href="#" class="btn btn-dark">
 				<i class="icon-printer"></i> Print
 			</a> */}
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customModalTwo">
+			<button type="button" class="btn btn-primary" onClick={() => handleToggleUpdateIntegration()}>
 			<i class="icon-person_add" style={{fontSize:'18px'}}></i> Create Agent
 			</button>
 		</div>
     	</div>
 		<div class="modal fade" id="customModalTwo" tabindex="-1" role="dialog" aria-labelledby="customModalTwoLabel" aria-hidden="true">
-										<Modal 
-										modalheader={
-											<>
-											<h5 class="modal-title" id="customModalTwoLabel">Create Agent</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</>
-										}
-										modalbody={
+										
+
+             <ModalComponent
+             modalState={modalUpdateIntegration}
+             modaalTitle={"Update Integration Details"}
+             handleClose={() => setModalUpdateIntegration(false)}
+             modalHeader={
+              <>
+              <h5 class="modal-title" id="customModalTwoLabel">Create Agent</h5>
+                <button type="button" class="close"  onClick={() => setModalUpdateIntegration(false)}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </>
+            }
+             modalBody={
                                            <form onSubmit={handleSubmit}>
 										
 										
@@ -412,7 +425,7 @@ const TableModal = ({stateChanger ,stateChange}) => {
 
                                             />
 										<div class="modal-footer justify-content-center">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" > <i class="icon-export"></i>  Close</button>
+                                        <button type="button" class="btn btn-secondary" onClick={() => setModalUpdateIntegration(false)}> <i class="icon-export"></i>  Close</button>
                                         <button type="submit" class="btn btn-primary" onClick={handleSubmit}  data-dismiss="modal" > Save Data </button>
 												</div>
 
@@ -421,8 +434,7 @@ const TableModal = ({stateChanger ,stateChange}) => {
 									
                   </form>
 										}
-										
-										/>
+              />
 									</div>
 
 		</>

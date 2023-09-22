@@ -1,4 +1,5 @@
 import React from 'react'
+import Modala from "react-bootstrap/Modal";
 
 const Modal = ({
     modalheader,
@@ -26,3 +27,32 @@ const Modal = ({
 }
 
 export default Modal
+
+
+
+export function ModalComponent({
+  modalTitle,
+  modalBody,
+  modalHeader,
+  modalState,
+  handleClose,
+  modalBackdrop,
+  modalEscapeKey,
+}) {
+  return (
+    <>
+      <Modala
+        show={modalState}
+        onHide={handleClose}
+        animation={false}
+        backdrop={modalBackdrop}
+        keyboard={modalEscapeKey}
+      >
+        <Modala.Header>
+          {modalHeader}
+        </Modala.Header>
+        <Modala.Body>{modalBody}</Modala.Body>
+      </Modala>
+    </>
+  );
+}
