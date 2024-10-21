@@ -7,6 +7,7 @@ import { Input } from '../../customComponents/input/customInputs';
 import useAuth from '../../hooks/useAuth';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { displayPropertyfields } from '../../utils/helpers';
+import { successNotification } from '../../utils/notification';
 
 
 const ManageProperty = () => {
@@ -247,7 +248,7 @@ const TableModal = ({stateChanger ,stateChange}) => {
             
            
             if (status === 201 || status === 200) {
-              //successNotification("Property Added successfully")
+              successNotification("Property Added successfully")
               setPropetyDetails(propertyDetailsInitialState)
               stateChanger(!stateChange)
               

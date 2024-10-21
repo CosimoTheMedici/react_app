@@ -7,12 +7,12 @@ export const menuItemsAgent = [
       icon:  <i class="icon-home1"></i>,
       exact: "true",
     },
-    {
-      name: "Payments",
-      path: "/customers",
-      icon: <i class="icon-attach_money"></i>,
-      exact: "false",
-    },
+    // {
+    //   name: "Payments",
+    //   path: "/customers",
+    //   icon: <i class="icon-attach_money"></i>,
+    //   exact: "false",
+    // },
     {
       name: "Units",
       path: "/estimates",
@@ -35,14 +35,14 @@ export const menuItemsAgent = [
           name: "Invoices List",
           path: "/invoices",
         },
-        {
-          name: "Invoices Grid",
-          path: "/invoice-grid",
-        },
-        {
-          name: "Invoices Grid 2",
-          path: "/invoice-grid-two",
-        },
+        // {
+        //   name: "Invoices Grid",
+        //   path: "/invoice-grid",
+        // },
+        // {
+        //   name: "Invoices Grid 2",
+        //   path: "/invoice-grid-two",
+        // },
      
       ],
     },
@@ -54,9 +54,9 @@ export const menuItemsAgent = [
           subMenuItems: [
             { name: "Manage Consumption", path: "/alerts" },
             { name: "Manage Utilities", path: "/accordions" },
-            { name: "Avatar", path: "/avatar" },
-            { name: "Badges", path: "/badges" },
-            { name: "Buttons", path: "/buttons" },
+            // { name: "Avatar", path: "/avatar" },
+            // { name: "Badges", path: "/badges" },
+            // { name: "Buttons", path: "/buttons" },
      
           ],
         },
@@ -88,13 +88,8 @@ export const menuItemsAgentOwner = [
         {
           name: "Manage Agents",
           path: "/manage/agent",
-        },
-        {
-          name: "Create Agent",
-          path: "/create/agent",
-        },
-       
-     
+        }   
+            
       ],
     },
     
@@ -132,10 +127,10 @@ export const menuItemsAgentOwner = [
           name: "Manage Consumption",
           path: "/manage/consumption",
         },
-        {
-          name: "Invoices Grid 2",
-          path: "/invoice-grid-two",
-        },
+        // {
+        //   name: "Invoices Grid 2",
+        //   path: "/invoice-grid-two",
+        // },
      
       ],
     },
@@ -149,23 +144,23 @@ export const menuItemsAgentOwner = [
           name: "Invoices List",
           path: "/invoices",
         },
-        {
-          name: "Invoices Grid",
-          path: "/invoice-grid",
-        },
-        {
-          name: "Invoices Grid 2",
-          path: "/invoice-grid-two",
-        },
+        // {
+        //   name: "Invoices Grid",
+        //   path: "/invoice-grid",
+        // },
+        // {
+        //   name: "Invoices Grid 2",
+        //   path: "/invoice-grid-two",
+        // },
      
       ],
     },
-    {
-      name: "Payments",
-      path: "/customers",
-      icon: <i class="icon-attach_money"></i>,
-      exact: "false",
-    },
+    // {
+    //   name: "Payments",
+    //   path: "/customers",
+    //   icon: <i class="icon-attach_money"></i>,
+    //   exact: "false",
+    // },
     {
           name: "Utilities",
           path: "#",
@@ -174,9 +169,9 @@ export const menuItemsAgentOwner = [
           subMenuItems: [
             { name: "Manage Utilities", path: "/manage/utilities" },
             { name: "Manage Consumption", path: "/manage/consumption" },
-            { name: "Avatar", path: "/avatar" },
-            { name: "Badges", path: "/badges" },
-            { name: "Buttons", path: "/buttons" },
+            // { name: "Avatar", path: "/avatar" },
+            // { name: "Badges", path: "/badges" },
+            // { name: "Buttons", path: "/buttons" },
      
           ],
         },

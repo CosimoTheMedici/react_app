@@ -19,7 +19,7 @@ import { fetchProperties } from "../../redux/propertiesActions";
 import { fetchUtilityData } from "../../redux/utilityActions";
 import {
   errorNotification,
-  successNotification,
+  successNotification,warningNotification
 } from "../../utils/notification";
 import {  findArrayRowName, findArrayRowUnit, findArrayValue } from "../../utils/functions";
 
@@ -140,7 +140,7 @@ async function fetchUnitsList() {
 
   try {
       const { data: responses, status } = await axiosPrivate.get(`/api/v1/units/myassignedunits/${id}`);
-      console.log("propertyArray responses ----->", responses.data);
+      console.log("unit responses responses ----->", responses.data);
 
       const { data: unitsdatas } = responses;
       const data = [];
@@ -180,7 +180,7 @@ async function fetchUnitsList() {
               unit_description,
               unit_id,
               unit_name,
-              unit_occupancy: unit_occupancy === 1 ? "vacant" : "occupied",
+              unit_occupancy: unit_occupancy === 1 ? "occupied " : "vacant",
               unit_property_id,
               unit_rent_Amount,
               unit_status: unit_status === 1 ? "OK" : "Not Ok",
@@ -419,6 +419,7 @@ const TableModal = ({ stateChanger, stateChange }) => {
       const response = await axiosPrivate.get(
         `/api/v1/utilities/byproperyid/${id}`
       );
+     
       const { data: resData, status } = response.data;
       if (response.status === 200) {
         const utilityTypes = {
@@ -442,6 +443,7 @@ const TableModal = ({ stateChanger, stateChange }) => {
         setWaterData(utilityTypes[1]);
         setKPLCData(utilityTypes[2]);
         setGarbageData(utilityTypes[3]);
+        console.log("utilityTypes[3]",waterData)
       } else {
         console.log(response.status);
       }
@@ -451,9 +453,9 @@ const TableModal = ({ stateChanger, stateChange }) => {
     }
   }
 
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const {
       unit_name,
       unit_property_id,
@@ -465,6 +467,7 @@ const TableModal = ({ stateChanger, stateChange }) => {
 
       unit_type,
     } = unitDetails;
+   
 
     const check = [
       unit_name,
@@ -476,6 +479,7 @@ const TableModal = ({ stateChanger, stateChange }) => {
       unit_description,
       unit_type,
     ].every((value) => value);
+    console.log(waterData)
     if (check === true) {
       let payload = {
         unit_name: unitDetails.unit_name,
@@ -487,7 +491,11 @@ const TableModal = ({ stateChanger, stateChange }) => {
         unit_description: unitDetails.unit_description,
         unit_type: unitDetails.unit_type,
         unit_createdBy: auth.user,
-      };
+         unit_garbage_charge_per_unit: garbageData.find(item => item.charge_id == unitDetails.unit_garbage_charge)?.charge_per_unit,
+         unit_kplc_charge_per_unit: kPLCData.find(item => item.charge_id == unitDetails.unit_kplc_charge)?.charge_per_unit,
+         unit_water_charge_per_unit: waterData.find(item => item.charge_id == unitDetails.unit_water_charge)?.charge_per_unit,
+       
+      }; 
 
       try {
         const createUnitsResponse = await axiosPrivate.post(
@@ -496,9 +504,10 @@ const TableModal = ({ stateChanger, stateChange }) => {
         );
         const { status } = createUnitsResponse;
 
-        if (status === 201) {
+        if (status === 206) {
           successNotification("Unit added successful");
           setUnitDetails(unitDetailsInitialState);
+          stateChanger(!stateChange)
         } else {
           errorNotification("something went wrong");
         }
@@ -507,6 +516,7 @@ const TableModal = ({ stateChanger, stateChange }) => {
         errorNotification("Error:something went wrong");
       }
     } else if (check === false) {
+      warningNotification("some fields are not filled")
     }
   };
 

@@ -3,6 +3,8 @@ import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
 	const { auth} = useAuth();
+
+	
   return (
     <header class="header">
 					<div class="toggle-btns">
