@@ -58,7 +58,7 @@ const Login = () => {
             console.log("cat",email)
 
 
-            let cat = decoded?.user_category.split(",") ?? decoded.result?.user_category.split(",")
+            let cat =  decoded.result?.user_category.split(",")
              cat = cat.map(Number);
              console.log("cat",cat)
 
