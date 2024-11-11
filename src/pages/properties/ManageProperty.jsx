@@ -338,6 +338,7 @@ const TableModal = ({ stateChanger, stateChange }) => {
                   type="button"
                   aria-label="Close"
                   onClick={handleCloseModal}
+                  class="close" data-dismiss="modal"
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
